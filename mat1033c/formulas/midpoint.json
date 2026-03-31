@@ -1,0 +1,40 @@
+{
+  "id": "midpoint",
+  "title": "Midpoint Formula",
+  "latex": "M = \\left(\\frac{x_1 + x_2}{2},\\; \\frac{y_1 + y_2}{2}\\right)",
+
+  "notes": [
+    "The midpoint is the exact center between two points.",
+    "Useful for geometry, graphing, and identifying line segments' centers.",
+    "Not to be confused with slope — midpoint averages coordinates."
+  ],
+
+  "examples": [
+    {
+      "description": "Find the midpoint between (2, 5) and (8, 1).",
+      "latex": "M = \\left(\\frac{2+8}{2}, \\frac{5+1}{2}\\right) = (5, 3)"
+    }
+  ],
+
+  "applications": [
+    "Finding the center point of a segment.",
+    "Used in geometry, coordinate proofs, and data clustering."
+  ],
+
+  "prerequisites": [],
+  "related": ["distance", "slope"],
+
+  "video": "https://www.khanacademy.org/math/geometry-home/analytic-geometry-topic/geometry-midpoints/v/midpoint-formula",
+
+  "translations": {},
+
+  "version": "1.0.0",
+
+  "copyright": {
+    "author": "Jesse Rogers",
+    "institution": "Palm Beach State College",
+    "contributors": [],
+    "license": "MIT",
+    "granted": "2026-03-30"
+  }
+}

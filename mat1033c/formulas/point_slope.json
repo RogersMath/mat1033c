@@ -1,0 +1,46 @@
+{
+  "id": "point_slope",
+  "title": "Point-Slope Form",
+  "latex": "y - y_1 = m(x - x_1)",
+
+  "notes": [
+    "Point-slope form is ideal when you know one point and the slope.",
+    "You may use ANY point on the line — students often freeze, but ANY correct point works.",
+    "Point-slope form can be rearranged into slope-intercept or standard form.",
+    "Useful for modeling a line when given a rate of change and initial value."
+  ],
+
+  "examples": [
+    {
+      "description": "Write the equation of a line through (3, −2) with slope 5.",
+      "latex": "y - (-2) = 5(x - 3)"
+    },
+    {
+      "description": "Using point (0, 4) instead — both points give the same final line.",
+      "latex": "y - 4 = 5(x - 0)"
+    }
+  ],
+
+  "applications": [
+    "Quickly writing a line when slope and a point are known.",
+    "Useful in word problems involving rates, changes, or comparing starting values.",
+    "Common in calculus as the equation of a tangent line."
+  ],
+
+  "prerequisites": ["slope"],
+  "related": ["slope_intercept", "standard_form"],
+
+  "video": "https://www.khanacademy.org/math/algebra/two-var-linear-equations/point-slope-form/v/point-slope-form",
+
+  "translations": {},
+
+  "version": "1.0.0",
+
+  "copyright": {
+    "author": "Jesse Rogers",
+    "institution": "Palm Beach State College",
+    "contributors": [],
+    "license": "MIT",
+    "granted": "2026-03-30"
+  }
+}

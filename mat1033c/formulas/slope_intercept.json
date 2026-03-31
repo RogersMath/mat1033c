@@ -1,0 +1,46 @@
+{
+  "id": "slope_intercept",
+  "title": "Slope-Intercept Form",
+  "latex": "y = mx + b",
+
+  "notes": [
+    "m is the slope, b is the y-intercept.",
+    "The y-intercept is the point where the line crosses the y-axis.",
+    "Slope-intercept form is the most recognizable form for graphing quickly.",
+    "If the equation is not solved for y, rearrange it to fit y = mx + b."
+  ],
+
+  "examples": [
+    {
+      "description": "Transform 3x - 2y = 6 into slope-intercept form.",
+      "latex": "-2y = -3x + 6 \\Rightarrow y = \\frac{3}{2}x - 3"
+    },
+    {
+      "description": "Write the line with slope 2 and y-intercept −5.",
+      "latex": "y = 2x - 5"
+    }
+  ],
+
+  "applications": [
+    "Fast graphing of lines.",
+    "Modeling linear relationships in science, economics, and data analysis.",
+    "Understanding intercepts and slope behavior."
+  ],
+
+  "prerequisites": ["slope"],
+  "related": ["point_slope", "standard_form"],
+
+  "video": "https://www.khanacademy.org/math/algebra/linear-functions/slope-intercept-form/v/slope-intercept-intuition",
+
+  "translations": {},
+
+  "version": "1.0.0",
+
+  "copyright": {
+    "author": "Jesse Rogers",
+    "institution": "Palm Beach State College",
+    "contributors": [],
+    "license": "MIT",
+    "granted": "2026-03-30"
+  }
+}

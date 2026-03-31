@@ -1,0 +1,314 @@
+/* ============================================================
+   ROOT VARIABLES — Harmonized Institutional Palette
+   ============================================================ */
+:root {
+  --navy1: #08152C;
+  --navy2: #1A3B6E;
+
+  --cream: #FFF8E7;
+  --cream-paper: #FAF7F0;
+  --black: #000000;
+
+  --gold1: #D4AF37;
+  --gold2: #F7E27D;
+  --gold-light: rgba(255, 230, 150, 0.75);
+
+  --hover-url: #004F9E;
+}
+
+/* ============================================================
+   GLOBAL
+   ============================================================ */
+body {
+  margin: 0;
+  font-family: "Playfair Display", serif;
+  background: var(--cream-paper);
+  color: var(--black);
+  line-height: 1.6;
+  overflow-x: hidden;
+  user-select: none;
+}
+
+/* ============================================================
+   FIXED HEADER
+   ============================================================ */
+header {
+  background: linear-gradient(to bottom, var(--navy1), var(--navy2));
+  padding: 1.2rem 1rem;
+  text-align: center;
+  color: var(--cream);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 2000;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.45);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.7rem;
+  font-family: "Cinzel", serif;
+  line-height: 1.25;
+}
+
+/* ============================================================
+   HAMBURGER MENU BUTTON
+   ============================================================ */
+.hamburger {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  width: 36px;
+  height: 30px;
+  cursor: pointer;
+  z-index: 3001;
+}
+
+.hamburger span {
+  display: block;
+  height: 5px;
+  margin: 6px 0;
+  background: var(--cream);
+  border-radius: 4px;
+}
+
+/* ============================================================
+   OVERLAY (CLICK TO CLOSE MENU)
+   ============================================================ */
+#menuOverlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  z-index: 2500;
+}
+
+#menuOverlay.active {
+  display: block;
+}
+
+/* ============================================================
+   SIDE MENU (Hamburger Drawer)
+   ============================================================ */
+.side-menu {
+  position: fixed;
+  top: 0;
+  left: -260px;
+  width: 260px;
+  height: 100%;
+  background: var(--navy1);
+  color: var(--cream);
+  padding-top: 5rem;
+  transition: left .25s ease;
+  z-index: 3000;
+}
+
+.side-menu.open {
+  left: 0;
+}
+
+.menu-link {
+  display: block;
+  padding: 1rem 1.2rem;
+  color: var(--cream);
+  font-size: 1.2rem;
+  font-family: "Cinzel", serif;
+  text-decoration: none;
+  border-bottom: 1px solid var(--navy2);
+}
+
+.menu-link:hover {
+  background: var(--navy2);
+}
+
+/* ============================================================
+   MAIN LANDMARK
+   ============================================================ */
+main {
+  margin-top: 120px;
+  position: relative;
+  min-height: calc(100vh - 180px);
+  overflow-x: hidden;
+}
+
+/* ============================================================
+   SECTION SWIPE TRANSITIONS
+   ============================================================ */
+.section {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  width: 100%;
+  padding: 1rem;
+  opacity: 0;
+  transform: translateX(20px);
+  transition:
+    transform 0.22s cubic-bezier(0.22, 0.61, 0.36, 1),
+    opacity 0.22s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.section.active {
+  left: 0;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ============================================================
+   SECTION HEADINGS
+   ============================================================ */
+.family-title {
+  font-family: "Cinzel", serif;
+  font-size: 1.7rem;
+  color: var(--navy1);
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+/* ============================================================
+   FORMULA TITLE
+   ============================================================ */
+.formula-title {
+  font-family: "Cinzel", serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  background: linear-gradient(to right, var(--navy1), var(--navy2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0 0 0.3rem 0;
+}
+
+/* ============================================================
+   RESPONSIVE CARD GRID
+   ============================================================ */
+.formula-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 800px) {
+  .formula-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ============================================================
+   FORMULA CARD — BASE STYLE
+   ============================================================ */
+.formula-card {
+  background: var(--cream);
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+/* ============================================================
+   TREASURE REVEAL LAYER — GOLD GRADIENT (drag gesture)
+   ============================================================ */
+.formula-card .reveal-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%; /* grows on drag */
+  background: linear-gradient(
+    to right,
+    var(--gold1) 0%,
+    var(--gold2) 60%,
+    var(--gold-light) 100%
+  );
+  transition: width 0.15s ease-out;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+/* ============================================================
+   DESKTOP HOVER LIGHT HALO
+   ============================================================ */
+@media (hover: hover) and (pointer: fine) {
+  .formula-card:hover {
+    box-shadow:
+      0 0 15px var(--gold-light),
+      0 0 25px rgba(255, 230, 150, 0.5);
+  }
+}
+
+/* ============================================================
+   DETAIL PAGE (slide-left)
+   ============================================================ */
+.formula-detail {
+  position: fixed;
+  top: 0;
+  left: 100%; /* off-screen */
+  width: 100%;
+  height: 100%;
+  background: var(--cream-paper);
+  z-index: 4000;
+  padding: 1rem;
+  overflow-y: auto;
+
+  transition:
+    transform 0.25s cubic-bezier(0.25, 0.8, 0.25, 1),
+    left 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.formula-detail.active {
+  left: 0;
+}
+
+/* ============================================================
+   DETAIL PAGE TITLE
+   ============================================================ */
+.detail-title {
+  font-family: "Cinzel", serif;
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(to right, var(--navy1), var(--navy2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ============================================================
+   DETAIL PAGE SECTIONS
+   ============================================================ */
+.detail-section {
+  margin: 1.2rem 0;
+  padding: 1rem;
+  background: var(--cream);
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+/* ============================================================
+   FOOTER (Sticky CTA)
+   ============================================================ */
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: var(--navy1);
+  color: var(--cream);
+  text-align: center;
+  font-family: "Lato", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.8rem 1rem;
+  z-index: 2000;
+  box-shadow: 0 -2px 4px rgba(0,0,0,0.3);
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+footer a {
+  color: var(--cream);
+  text-decoration: none;
+}
+
+footer a:hover::after {
+  content: "";
+}
