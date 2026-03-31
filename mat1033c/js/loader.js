@@ -1,20 +1,20 @@
 // =============================================================
-// loader.js — Handles Course + Formula + Translation Loading
-// ES Module — Part of the MAT1033c SLC Survival Guide Architecture
+// loader.js — Loads Course, Formula JSON, and Translations
+// Updated for GitHub Pages subfolder structure
 // =============================================================
+
+// Base paths NOW include the mat1033c/ subfolder
+const COURSE_FILE = './mat1033c/course.json';
+const FORMULA_DIR = './mat1033c/formulas/';
+const I18N_DIR = './mat1033c/i18n/';
 
 // Caches
 let courseCache = null;
 let formulaCache = {};
 let translationCache = {};
 
-// Base paths (future-proof)
-const COURSE_FILE = './course.json';
-const FORMULA_DIR = './formulas/';
-const I18N_DIR = './i18n/';
-
 // =============================================================
-// Utility: Fetch JSON with graceful fallback + validation stub
+// Utility: Fetch JSON safely
 // =============================================================
 async function fetchJSON(url) {
   try {
@@ -28,7 +28,7 @@ async function fetchJSON(url) {
 }
 
 // =============================================================
-// Initialize Caches (called once by engine.js)
+// Reset caches (called once from engine.js)
 // =============================================================
 export function initCache() {
   courseCache = null;
@@ -37,23 +37,21 @@ export function initCache() {
 }
 
 // =============================================================
-// Load Course Structure (course.json)
+// Load course.json
 // =============================================================
 export async function loadCourse() {
   if (courseCache) return courseCache;
 
   const json = await fetchJSON(COURSE_FILE);
-  if (!json) throw new Error("Failed to load course.json.");
+  if (!json) throw new Error("Failed to load course.json");
 
-  // Optional validation hook
   validateCourse(json);
-
   courseCache = json;
   return json;
 }
 
 // =============================================================
-// Load Formula JSON (lazy-loaded on demand)
+// Load formula JSON (lazy-load each file)
 // =============================================================
 export async function loadFormula(id) {
   if (formulaCache[id]) return formulaCache[id];
@@ -62,7 +60,7 @@ export async function loadFormula(id) {
   const json = await fetchJSON(path);
 
   if (!json) {
-    console.warn(`Formula ${id} missing; returning placeholder.`);
+    console.warn(`Formula ${id} not found — placeholder returned.`);
     formulaCache[id] = {
       id,
       title: `Missing formula: ${id}`,
@@ -76,15 +74,13 @@ export async function loadFormula(id) {
     return formulaCache[id];
   }
 
-  // Optional validation
   validateFormula(json);
-
   formulaCache[id] = json;
   return json;
 }
 
 // =============================================================
-// Load Translation File for a Language
+// Load translations for selected language
 // =============================================================
 export async function loadTranslations(lang) {
   if (translationCache[lang]) return translationCache[lang];
@@ -92,44 +88,36 @@ export async function loadTranslations(lang) {
   const path = `${I18N_DIR}${lang}.json`;
   const json = await fetchJSON(path);
 
-  if (!json) {
-    console.warn(`Missing translation file for lang '${lang}', using empty stub.`);
-    translationCache[lang] = {};
-  } else {
-    translationCache[lang] = json;
-  }
-
+  translationCache[lang] = json || {};
   return translationCache[lang];
 }
 
 // =============================================================
-// Helpers for Validation (lightweight, expand later)
+// Validation (lightweight)
 // =============================================================
 function validateCourse(json) {
-  if (!json.sections || !Array.isArray(json.sections)) {
-    console.warn("Course JSON missing 'sections' array.");
+  if (!Array.isArray(json.sections)) {
+    console.warn("course.json missing 'sections' array");
   }
-  // You may add deeper validation rules here.
 }
 
 function validateFormula(json) {
-  if (!json.id) console.warn("Formula JSON missing 'id'.");
-  if (!json.title) console.warn(`Formula ${json.id} missing 'title'.`);
-  if (!json.latex) console.warn(`Formula ${json.id} missing 'latex'.`);
-  // Expand with more robust validation as needed.
+  if (!json.id) console.warn("Formula JSON missing id");
+  if (!json.title) console.warn(`Formula ${json.id} missing title`);
+  if (!json.latex) console.warn(`Formula ${json.id} missing latex`);
 }
 
 // =============================================================
-// Utilities for external modules
+// Get cached data
 // =============================================================
+export function getCourseMetadata() {
+  return courseCache;
+}
+
 export function getFormulaCache() {
   return formulaCache;
 }
 
 export function getTranslations(lang) {
   return translationCache[lang] || {};
-}
-
-export function getCourseMetadata() {
-  return courseCache;
 }
